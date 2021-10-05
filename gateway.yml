@@ -1,0 +1,27 @@
+server:
+    port: 8080
+
+eureka:
+    instance:
+        hostname: localhost
+        port: 9000
+    client:
+        serviceUrl: 
+            defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka
+    server:
+        wait-time-in-ms-when-sync-empty: 3000   
+
+spring:
+    application:
+        name: gateway
+    cloud:
+        gateway:
+            routes:
+            - id: catalogModule
+              uri: lb://CATALOG
+              predicates:
+              - Path=/cart/**
+            - id: productModule
+              uri: lb://PRODUCTS
+              predicates:
+              - Path=/product/**
