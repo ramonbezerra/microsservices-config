@@ -19,11 +19,11 @@ spring:
           lower-case-service-id: true
       routes:
         - id: products
-          uri: lb://products
+          uri: http://localhost:8082/api/v1/products
           predicates:
             - Path=/product/**
         - id: catalog
-          uri: lb://catalog
+          uri: http://localhost:8082/api/v1/carts
           predicates:
             - Path=/cart/**
             
